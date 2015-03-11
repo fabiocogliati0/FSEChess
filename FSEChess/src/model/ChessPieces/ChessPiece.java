@@ -27,4 +27,25 @@ public abstract class ChessPiece {
 		return color;
 	}
 	
+	//ritorna il path del file della immagine del pezzo
+	public String getImagePath(){
+		
+		String path = Constants.imgDirectory + "/";
+		if(isWhite()){
+			path += Constants.imgWhitePiecesFilePrefix;
+		}
+		else{
+			path += Constants.imgBlackPiecesFilePrefix;
+		}
+		path += this.getClass().getSimpleName() + Constants.imgExtension;
+		return path;
+	}
+	
+	@Override
+	public String toString(){
+		String string = getClass().getName();
+		if(color == Constants.whiteColor) string += "White";
+		else string += "Black";
+		return string;
+	}
 }

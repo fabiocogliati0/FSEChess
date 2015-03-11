@@ -5,29 +5,86 @@
 
 package controller;
 
-import moves.Mover;
-import moves.Solver;
+import model.Configuration;
+import model.Constants;
+import model.Model;
+import model.ChessPieces.ChessPiece;
 import view.View;
 
 public class ChessBoardController implements Controller{
 
 	private final View view;
-	private final Mover mover;
-	private final Solver solver;
+	private final Model model;
 	
-	public ChessBoardController(View view){
+	private int pieceSelectedX;
+	private int pieceSelectedY;
+	private ChessPiece pieceSelected;
+	
+	private boolean turnColor;
+	
+	
+	public ChessBoardController(View view, Model model){
 		this.view = view;
-		this.mover = new Mover(view.getModel());
-		this.solver = new Solver(view.getModel());
-		
+		this.model = model;
 		view.setController(this);
+		
+		turnColor = Constants.whiteColor;
 	}
 	
 	@Override
 	public void onClick(int x, int y) {
-		mover.moveAt(x,y);
-		if(mover.isSolved())
-			view.showSolvedDialog();
+		
+		// se non ho ancora selezionato un pezzo memorizzo il pezzo cliccato
+		if(pieceSelected == null){
+			if( model.at(x, y) != null && model.at(x,y).getColor() == turnColor) {
+				selectPiece(x, y);
+			}
+		}
+		//se ho già selezionato il pezzo controllo se si può muovere nella casella cliccata e lo muovo
+		else{
+			
+			//se la casella selezionata è la stessa precedente deseleziono il pezzo attualmente selezionato
+			if(x == pieceSelectedX && y == pieceSelectedY){
+				deselectPiece(x, y);
+			}
+			
+			if(true){	//TODO: controllare se la mossa è legale
+				
+				
+				moveAt(x,y);
+				
+				deselectPiece(x, y);
+				
+				//controllo lo scacco matto
+				if(isSolved()){
+					view.showSolvedDialog();
+				}
+				
+				
+			}
+		}
+		
+		
+	}
+	
+	private void moveAt(int x, int y) {
+		model.setConfiguration(model.getConfiguration().swap(pieceSelectedX, pieceSelectedY, x, y));
+	}
+
+	private boolean isSolved() {
+		return false;
+	}
+	
+	private void selectPiece(int x, int y){
+		pieceSelectedX = x;
+		pieceSelectedY = y;
+		pieceSelected = model.at(x, y);
+		view.selectPiece(x, y);
+	}
+	
+	private void deselectPiece(int x, int y){
+		pieceSelected = null;
+		view.deselectPiece(x, y);
 	}
 
 }

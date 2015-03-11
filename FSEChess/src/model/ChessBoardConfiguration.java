@@ -9,17 +9,18 @@ import model.ChessPieces.*;
 
 public class ChessBoardConfiguration implements Configuration{
 	
-	private ChessPiece tiles[][];
+	private ChessPiece tiles[][] = new ChessPiece [Constants.tileSizeX][Constants.tileSizeY];
 	
 	public ChessBoardConfiguration(){
-		tiles = new ChessPiece [Constants.tileSizeX][Constants.tileSizeY];
 		setInitialConfiguration();
 	}
 	
 	public ChessBoardConfiguration(ChessBoardConfiguration other){
 		for(int x = 0; x < Constants.tileSizeX; x++){
 			for(int y = 0; y < Constants.tileSizeX; y++){
-				tiles[x][y] = other.tiles[x][y];
+				if(other.tiles[x][y] != null){
+					tiles[x][y] = other.tiles[x][y];
+				}
 			}
 		}
 	}

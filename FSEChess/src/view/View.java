@@ -16,4 +16,7 @@ public interface View {
 	public void showSolvedDialog();
 	
 	public void onConfigurationChange();
+	
+	public void selectPiece(int x, int y);
+	public void deselectPiece(int x, int y);
 }

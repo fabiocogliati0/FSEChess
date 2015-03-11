@@ -35,7 +35,6 @@ public class ChessBoardModel implements Model{
 				view.onConfigurationChange();
 			}
 		}
-		
 	}
 
 	@Override

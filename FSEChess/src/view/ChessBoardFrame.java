@@ -14,19 +14,25 @@ import javax.swing.JPanel;
 import controller.ChessBoardController;
 import controller.Controller;
 import model.ChessBoardModel;
+import model.ChessBoardConfiguration;
+import model.Model;
 
 public class ChessBoardFrame extends JFrame{
-	private final ChessBoardModel chessBoard;
+	
+	private final Model chessBoard;
 	private final Controller controller;
 	
 	public ChessBoardFrame(){
 		
 		setTitle("Chess");
+		setResizable(false);
 		
-		chessBoard = new ChessBoardModel();
+		ChessBoardConfiguration conf = new ChessBoardConfiguration();
+		
+		chessBoard = new ChessBoardModel(conf);
 		
 		View view = addTiles();
-		controller = new ChessBoardController(view);
+		controller = new ChessBoardController(view, chessBoard);
 		
 		setIconImage(new ImageIcon("img/chess-icon.png").getImage());
 		
