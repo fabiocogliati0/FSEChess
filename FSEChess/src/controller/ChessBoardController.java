@@ -47,17 +47,20 @@ public class ChessBoardController implements Controller{
 			if(x == pieceSelectedX && y == pieceSelectedY){
 				deselectPiece(x, y);
 			}
-			else if(true){	//TODO: controllare se la mossa è legale
+			else if(pieceSelected.legalMove(pieceSelectedX, pieceSelectedY, x, y) &&
+					!sameColorOnTheArrival(x, y)){
+				if(pieceSelected.canFly() || !someoneOnThePath(pieceSelectedX, pieceSelectedY, x, y)){
 				
-				deselectPiece(pieceSelectedX, pieceSelectedY);
-				moveAt(x,y);
-				
-				//controllo lo scacco matto
-				if(isSolved()){
-					view.showSolvedDialog();
-				}
-				else{
-					turnColor = !turnColor;
+					deselectPiece(pieceSelectedX, pieceSelectedY);
+					moveAt(x,y);
+					
+					//controllo lo scacco matto
+					if(isSolved()){
+						view.showSolvedDialog();
+					}
+					else{
+						turnColor = !turnColor;
+					}
 				}
 				
 			}
@@ -86,4 +89,17 @@ public class ChessBoardController implements Controller{
 		view.deselectPiece(x, y);
 	}
 
+	//TODO
+	private boolean someoneOnThePath(int fromX, int fromY, int toX, int toY){
+		return false; //TODO
+	}
+	
+	private boolean sameColorOnTheArrival(int toX, int toY){
+		if(model.at(toX,toY) != null){
+			return model.at(toX, toY).isOfColor(turnColor);
+		}
+		else{
+			return false;
+		}
+	}
 }

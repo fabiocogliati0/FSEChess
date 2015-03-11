@@ -25,7 +25,7 @@ public class ChessBoardFrame extends JFrame{
 	public ChessBoardFrame(){
 		
 		setTitle("Chess");
-		setResizable(false);
+		//setResizable(false);
 		
 		ChessBoardConfiguration conf = new ChessBoardConfiguration();
 		

@@ -23,9 +23,17 @@ public abstract class ChessPiece {
 		return (color==Constants.blackColor);
 	}
 
+	public boolean isOfColor(boolean color){
+		return (this.color == color);
+	}
+	
 	public boolean getColor(){
 		return color;
 	}
+	
+	public abstract boolean legalMove(int fromX, int fromY, int toX, int toY);
+	
+	public abstract boolean canFly();
 	
 	//ritorna il path del file della immagine del pezzo
 	public String getImagePath(){

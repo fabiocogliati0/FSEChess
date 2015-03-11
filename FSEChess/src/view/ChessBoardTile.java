@@ -1,18 +1,22 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
 import model.Constants;
 import model.ChessPieces.ChessPiece;
 
 public class ChessBoardTile extends JPanel{
 
 	private final static Color deselectedButtonColorWhite = new Color(1.0f, 1.0f, 1.0f);
-	private final static Color deselectedButtonColorBlack = new Color(0.0f, 0.0f, 0.0f);
+	private final static Color deselectedButtonColorBlack = new Color(0.4f, 0.4f, 0.4f);
 	private final static Color selectedButtonColor = new Color(0.0f, 0.0f, 1.0f);
 	
 	private final static int chessPieceImageSizeX = 60;
@@ -22,6 +26,7 @@ public class ChessBoardTile extends JPanel{
 	
 	private JLabel label;
 	private final JButton button;
+	private final JLayeredPane layeredPane;
 	
 	public ChessBoardTile(int x, int y, boolean tileColor, JButton button){
 		this(x,y,tileColor,button, null);
@@ -34,8 +39,15 @@ public class ChessBoardTile extends JPanel{
 		
 		setPiece(chessPiece);
 		
-		add(button);
-		add(label);
+		layeredPane = new JLayeredPane();
+		layeredPane.setPreferredSize(new Dimension(300, 300));
+		layeredPane.add(button, new Integer(50));
+		layeredPane.add(label, new Integer(100));
+		
+		label.setBounds(120, 7, 80, 80 ); 
+        button.setBounds( 0, 0,  220, 220 );
+		
+		this.add(layeredPane);
 		
 		deselectPiece();
 	}
