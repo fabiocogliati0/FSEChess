@@ -34,6 +34,7 @@ public class ChessBoardFrame extends JFrame{
 		View view = addTiles();
 		controller = new ChessBoardController(view, chessBoard);
 		
+		
 		setIconImage(new ImageIcon("img/chess-icon.png").getImage());
 		
 		pack();

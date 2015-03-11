@@ -5,6 +5,8 @@
 
 package model;
 
+import java.awt.Color;
+
 public final class Constants{
 	
 	public final static int tileSizeX = 8;

@@ -38,6 +38,24 @@ public class ChessBoardConfiguration implements Configuration{
 		return nextConfiguration;
 	}
 	
+	@Override
+	public String toString(){
+		String string = "";
+		for(int x = 0; x < Constants.tileSizeX; x++){
+			for(int y = 0; y < Constants.tileSizeX; y++){
+				if(tiles[x][y] != null){
+					string += tiles[x][y] + "\t";
+				}
+				else{
+					string += "emptyTile\t";
+				}
+			}
+			string += "\n";
+		}
+		
+		return string;
+	}
+	
 	//migliorare il metodo per renderlo più generico se possibile
 	private void setInitialConfiguration(){
 		//inserisce la fila di pedoni neri

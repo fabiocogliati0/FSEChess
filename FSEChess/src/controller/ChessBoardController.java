@@ -47,19 +47,18 @@ public class ChessBoardController implements Controller{
 			if(x == pieceSelectedX && y == pieceSelectedY){
 				deselectPiece(x, y);
 			}
-			
-			if(true){	//TODO: controllare se la mossa è legale
+			else if(true){	//TODO: controllare se la mossa è legale
 				
-				
+				deselectPiece(pieceSelectedX, pieceSelectedY);
 				moveAt(x,y);
-				
-				deselectPiece(x, y);
 				
 				//controllo lo scacco matto
 				if(isSolved()){
 					view.showSolvedDialog();
 				}
-				
+				else{
+					turnColor = !turnColor;
+				}
 				
 			}
 		}

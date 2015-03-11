@@ -43,7 +43,7 @@ public abstract class ChessPiece {
 	
 	@Override
 	public String toString(){
-		String string = getClass().getName();
+		String string = getClass().getSimpleName();
 		if(color == Constants.whiteColor) string += "White";
 		else string += "Black";
 		return string;
