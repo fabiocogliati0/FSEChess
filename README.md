@@ -17,6 +17,8 @@ Alcune note sul progetto:
     -Presa al passante
     -Promozione dei pezzi
     
+L'intero progetto è stato realizato seguendo il pattern MVC    
+
 I pezzi vengono instanziati attraverso una factory che in base al tipo e al colore passato genera il pezzo
 
 Le classi che derivano da ChessPiece potevano essere implementate usando lo strategy pattern creando due behaviour :
