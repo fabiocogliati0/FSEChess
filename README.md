@@ -6,22 +6,16 @@ Università di Verona
 Alcune note sul progetto:
 
   Implementazioni aggiuntive rispetto alla specifica:
-    
-    Ho aggiunto la previsione delle mosse, quando si seleziona un pezzo vengono illuminate tutte le caselle
-    dove quel pezzo si può spostare, tenendo bene in considerazione di non illuminare le caselle che portano
-    a uno scatto per il giocatore che sta muovendo
-    
-    Movimento iniziale di due caselle per i pedoni
-    
+    -Ho aggiunto la previsione delle mosse, quando si seleziona un pezzo vengono illuminate tutte le caselle
+     dove quel pezzo si può spostare, tenendo bene in considerazione di non illuminare le caselle che portano
+     a uno scatto per il giocatore che sta muovendo
+    -Movimento iniziale di due caselle per i pedoni
+    -JavaDoc dell'intero progetto
     
   Non ho implementato:
-  
-    Arrocco
-    
-    Presa al passante
-    
-    Promozione dei pezzi
-    
+    -Arrocco
+    -Presa al passante
+    -Promozione dei pezzi
     
 I pezzi vengono instanziati attraverso una factory che in base al tipo e al colore passato genera il pezzo
 
