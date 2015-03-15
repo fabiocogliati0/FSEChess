@@ -36,7 +36,12 @@ public class ChessBoardModel implements Model{
 			}
 		}
 	}
-
+	
+	@Override
+	public void setInitialConfiguration(){
+		setConfiguration(new ChessBoardConfiguration());
+	}
+	
 	@Override
 	public void setView(View view) {
 		this.view = view;

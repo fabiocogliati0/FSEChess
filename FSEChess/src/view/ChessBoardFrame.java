@@ -6,11 +6,8 @@
 package view;
 
 import java.awt.BorderLayout;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import controller.ChessBoardController;
 import controller.Controller;
 import model.ChessBoardModel;
@@ -20,28 +17,29 @@ import model.Model;
 public class ChessBoardFrame extends JFrame{
 	
 	private final Model chessBoard;
-	private final Controller controller;
 	
 	public ChessBoardFrame(){
+		super();
 		
-		setTitle("Chess");
-		//setResizable(false);
+		setTitle("FSE Project : Chess Game - Fabio Cogliati");
+		setResizable(false);
 		
+		//creates a chessBoard with the start chess configuration
 		ChessBoardConfiguration conf = new ChessBoardConfiguration();
-		
 		chessBoard = new ChessBoardModel(conf);
 		
-		View view = addTiles();
-		controller = new ChessBoardController(view, chessBoard);
+		//creates the panel of the chessBoard
+		View view = addTilesPanel();
 		
+		//creates the controller
+		new ChessBoardController(view, chessBoard);
 		
 		setIconImage(new ImageIcon("img/chess-icon.png").getImage());
 		
 		pack();
-		
 	}
 	
-	private View addTiles(){
+	private View addTilesPanel(){
 		ChessBoardPanel panel = new ChessBoardPanel(chessBoard, this);
 		add(panel, BorderLayout.CENTER);
 		return panel;

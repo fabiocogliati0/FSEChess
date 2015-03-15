@@ -13,7 +13,7 @@ public class Main {
 			@Override
 			public void run() {
 				JFrame frame = new ChessBoardFrame();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setSize(screenSizeX, screenSizeY);
 				frame.setVisible(true);
 			}

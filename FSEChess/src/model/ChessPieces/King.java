@@ -5,13 +5,15 @@
 
 package model.ChessPieces;
 
+import model.Configuration;
+
 public class King extends ChessPiece{
 	
 	public King(boolean color) {
 		super(color);
 	}
 	
-	public boolean legalMove(int fromX, int fromY, int toX, int toY){
+	public boolean legalMove(int fromX, int fromY, int toX, int toY, Configuration configuration){
 		
 		int distX = Math.abs(toX - fromX);
 		int distY = Math.abs(toY - fromY);
@@ -26,7 +28,7 @@ public class King extends ChessPiece{
 	}
 	
 	public boolean canFly(){
-		return true;
+		return false;
 	}
 
 }

@@ -16,90 +16,114 @@ public class ChessBoardController implements Controller{
 	private final View view;
 	private final Model model;
 	
+	private boolean pieceSelected;		//true se un pezzo è selezionato
 	private int pieceSelectedX;
 	private int pieceSelectedY;
-	private ChessPiece pieceSelected;
 	
 	private boolean turnColor;
+
+	//ATTENZIONE: per ora questa matrice è inutilizzata, utilizzarla per non fare i controlli quando si muove
+	//serve solo per ottimizzazione
+	private boolean[][] pieceSelectedAllowedMoves = new boolean[8][8];		//decidere se rimuovere o implementare
 	
-	
+
 	public ChessBoardController(View view, Model model){
 		this.view = view;
 		this.model = model;
 		view.setController(this);
-		
 		turnColor = Constants.whiteColor;
 	}
 	
 	@Override
 	public void onClick(int x, int y) {
 		
-		// se non ho ancora selezionato un pezzo memorizzo il pezzo cliccato
-		if(pieceSelected == null){
-			if( model.at(x, y) != null && model.at(x,y).getColor() == turnColor) {
-				selectPiece(x, y);
-			}
-		}
-		//se ho già selezionato il pezzo controllo se si può muovere nella casella cliccata e lo muovo
-		else{
-			
-			//se la casella selezionata è la stessa precedente deseleziono il pezzo attualmente selezionato
-			if(x == pieceSelectedX && y == pieceSelectedY){
-				deselectPiece(x, y);
-			}
-			else if(pieceSelected.legalMove(pieceSelectedX, pieceSelectedY, x, y) &&
-					!sameColorOnTheArrival(x, y)){
-				if(pieceSelected.canFly() || !someoneOnThePath(pieceSelectedX, pieceSelectedY, x, y)){
-				
-					deselectPiece(pieceSelectedX, pieceSelectedY);
-					moveAt(x,y);
-					
-					//controllo lo scacco matto
-					if(isSolved()){
-						view.showSolvedDialog();
-					}
-					else{
-						turnColor = !turnColor;
-					}
+		if(model.at(x, y) != null && model.at(x, y).isOfColor(turnColor)){		//se clicco su un pezzo del colore del giocatore di turno
+			if(pieceSelected){													//se avevo già un pezzo selezionato lo deseleziono
+				deselectPiece();
+				if(x != pieceSelectedX || y != pieceSelectedY) {				//se il pezzo cliccato è diverso da quello precedentemente selezionato seleziono questo
+					selectPiece(x,y);
 				}
+			}
+			else{																//se non avevo un pezzo già selezionato seleziono quello cliccato
+				selectPiece(x,y);
+			}
+		}
+		else if(pieceSelected){																	//se clicco su una casella vuota o su un pezzo dell'altro colore e ho un pezzo selezionato
+			if(model.getConfiguration().isLegalMove(pieceSelectedX, pieceSelectedY, x, y)){		//se la mossa del pezzo selezionato verso la casella selezionata è legale nella configurazione corrente
+				deselectPiece();																//deseleziono il pezzo
+				move(pieceSelectedX, pieceSelectedY, x, y);										//eseguo la mossa
 				
+				if(!checkVictory()){
+					turnColor = !turnColor;															//cambio il colore del turno
+				}
 			}
 		}
 		
-		
-	}
-	
-	private void moveAt(int x, int y) {
-		model.setConfiguration(model.getConfiguration().swap(pieceSelectedX, pieceSelectedY, x, y));
 	}
 
-	private boolean isSolved() {
-		return false;
+	public void restartGame(){
+		model.setInitialConfiguration();
+		deselectPiece();
+		turnColor = Constants.whiteColor;
 	}
+	
+	private boolean checkVictory() {
+		
+		boolean chess = false;
+		boolean chessMate = false;
+		
+		if(model.getConfiguration().isChessConfiguration(!turnColor)) chess = true;
+		if(model.getConfiguration().isChessMateConfiguration(!turnColor)) chessMate = true;
+		
+		//chess
+		if(chess && !chessMate){
+			view.showCheckDialog(turnColor);
+		}
+		//chessMate
+		else if(chess && chessMate){
+			view.showCheckmateDialog(turnColor);
+		}
+		//patta
+		else if(!chess & chessMate){
+			view.ShowDrawDialog();
+		}
+
+		return chessMate;
+	}
+	
 	
 	private void selectPiece(int x, int y){
+		
+		//memorizza la posizione del pezzo selezionato
 		pieceSelectedX = x;
 		pieceSelectedY = y;
-		pieceSelected = model.at(x, y);
-		view.selectPiece(x, y);
+		pieceSelected = true;
+		
+		//evidenzia il pezzo sulla view
+		view.selectTileSpecialColor(x, y);
+		
+		//evidenzia tutte le caselle dove il pezzo può muoversi sulla view
+		Configuration currentConf = model.getConfiguration();
+		for(int i=0; i<8; i++){
+			for(int j=0 ; j<8; j++){
+				if(currentConf.isLegalMove(pieceSelectedX, pieceSelectedY, i, j)){
+					pieceSelectedAllowedMoves[i][j] = true;
+					view.selectTile(i, j);
+				}
+				else{
+					pieceSelectedAllowedMoves[i][j] = false;
+				}
+			}
+		}
 	}
 	
-	private void deselectPiece(int x, int y){
-		pieceSelected = null;
-		view.deselectPiece(x, y);
-	}
-
-	//TODO
-	private boolean someoneOnThePath(int fromX, int fromY, int toX, int toY){
-		return false; //TODO
+	private void deselectPiece(){
+		pieceSelected = false;
+		view.deselectAllTiles();
 	}
 	
-	private boolean sameColorOnTheArrival(int toX, int toY){
-		if(model.at(toX,toY) != null){
-			return model.at(toX, toY).isOfColor(turnColor);
-		}
-		else{
-			return false;
-		}
+	private void move(int fromX, int fromY, int toX, int toY){
+		//cambio configurazione
+		model.setConfiguration(model.getConfiguration().swap(fromX, fromY, toX, toY));
 	}
 }

@@ -5,13 +5,15 @@
 
 package model.ChessPieces;
 
+import model.Configuration;
+
 public class Bishop extends ChessPiece{
 	
 	public Bishop(boolean color) {
 		super(color);
 	}
 
-	public boolean legalMove(int fromX, int fromY, int toX, int toY){
+	public boolean legalMove(int fromX, int fromY, int toX, int toY, Configuration configuration){
 		
 		int distX = Math.abs(toX - fromX);
 		int distY = Math.abs(toY - fromY);

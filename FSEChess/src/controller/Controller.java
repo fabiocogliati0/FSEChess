@@ -7,4 +7,5 @@ package controller;
 
 public interface Controller {
 	public void onClick(int x, int y);
+	public void restartGame();
 }

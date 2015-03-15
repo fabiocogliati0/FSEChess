@@ -14,5 +14,6 @@ public interface Model {
 	public Configuration getConfiguration();
 	
 	public void setConfiguration(Configuration configuration);
+	public void setInitialConfiguration();
 	public void setView(View view);
 }

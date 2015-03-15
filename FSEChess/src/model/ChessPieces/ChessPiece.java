@@ -5,6 +5,7 @@
 
 package model.ChessPieces;
 
+import model.Configuration;
 import model.Constants;
 
 public abstract class ChessPiece {
@@ -31,7 +32,7 @@ public abstract class ChessPiece {
 		return color;
 	}
 	
-	public abstract boolean legalMove(int fromX, int fromY, int toX, int toY);
+	public abstract boolean legalMove(int fromX, int fromY, int toX, int toY, Configuration configuration);
 	
 	public abstract boolean canFly();
 	
