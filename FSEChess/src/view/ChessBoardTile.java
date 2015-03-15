@@ -17,8 +17,16 @@ import javax.swing.JPanel;
 import model.Constants;
 import model.ChessPieces.ChessPiece;
 
+/**
+ * A panel that represent a single tile of the chessBoard
+ */
 public class ChessBoardTile extends JPanel{
 	
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 3L;
+
 	/**
 	 * Color of the background of the button of the white tile
 	 */
@@ -35,7 +43,7 @@ public class ChessBoardTile extends JPanel{
 	private final static Color selectedPieceButtonColor = new Color(0.0f, 0.0f, 1.0f);
 
 	/**
-	 * Color of the button of a selected tile
+	 * Color of the button of a tile that is a legal move for the selected piece
 	 */
 	private final static Color selectedButtonColor = new Color(0.0f, 0.8f, 0.8f);
 	
@@ -60,7 +68,7 @@ public class ChessBoardTile extends JPanel{
 	private JLabel label;
 	
 	/**
-	 * Button that rappresent the chess tile
+	 * Button that represent the chess tile
 	 */
 	private final JButton button;
 	
@@ -69,10 +77,19 @@ public class ChessBoardTile extends JPanel{
 	 */
 	private final JLayeredPane layeredPane;
 	
+	
+	
+	
+	/**
+	 * Constructor of an empty tile
+	 */
 	public ChessBoardTile(int x, int y, boolean tileColor, JButton button){
 		this(x,y,tileColor,button, null);
 	}
 
+	/**
+	 * Constructor of a tile with a piece on it
+	 */
 	public ChessBoardTile(int x, int y, boolean tileColor, JButton button, ChessPiece chessPiece){
 		
 		super();
@@ -96,21 +113,31 @@ public class ChessBoardTile extends JPanel{
 		
 		this.add(layeredPane);
 		
-		deselectPiece();
+		deselectTile();
 		
 	}
 	
+	/**
+	 * Places the image of a piece on the tile
+	 */
 	public void setPiece(ChessPiece piece){
 		label.setIcon(null);
 		ImageIcon image = getPieceImage(piece);
 		if(image!=null) label.setIcon(image);
 	}
 	
+	/**
+	 * Selects the current tile changing the background color of the button to selectedPieceButtonColor
+	 */
 	public void selectPiece(){
 		button.setBackground(selectedPieceButtonColor);
 	}
 	
-	public void deselectPiece(){
+	/**
+	 * Deselects the current tile changing the background color of the button to 
+	 * deselectedButtonColorWhite or deselectedButtonColorBlack depending on original color of the tile
+	 */
+	public void deselectTile(){
 		if(tileColor==Constants.whiteColor){
 			button.setBackground(deselectedButtonColorWhite);
 		}
@@ -119,14 +146,16 @@ public class ChessBoardTile extends JPanel{
 		}
 	}
 	
+	/**
+	 * Select the current tile changing the background color of the button to selectedButtonColor
+	 */
 	public void selectTile(){
 		button.setBackground(selectedButtonColor);
 	}
-	
-	public void deselectTile(){
-		deselectPiece();
-	}
-	
+
+	/**
+	 * Creates and scales the ImageIcon of the passed piece
+	 */
 	private ImageIcon getPieceImage(ChessPiece piece){
 		ImageIcon imageIcon = null;
 		if(piece!=null){

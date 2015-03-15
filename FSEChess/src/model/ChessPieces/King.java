@@ -7,13 +7,24 @@ package model.ChessPieces;
 
 import model.Configuration;
 
+/**
+ * Class that represent King Piece
+ */
 public class King extends ChessPiece{
 	
+	/**
+	 * Constructor that takes the color of the piece
+	 */
 	public King(boolean color) {
 		super(color);
 	}
 	
-	public boolean legalMove(int fromX, int fromY, int toX, int toY, Configuration configuration){
+	/**
+	 * Check if the piece can make passed move in an ideal empty and infinite chessBoard.
+	 * The configuration will be checked only if the piece have some special move that is triggered only depending other
+	 * pieces on the board (like pawns)
+	 */
+	public boolean canMove(int fromX, int fromY, int toX, int toY, Configuration configuration){
 		
 		int distX = Math.abs(toX - fromX);
 		int distY = Math.abs(toY - fromY);
@@ -27,6 +38,9 @@ public class King extends ChessPiece{
 		
 	}
 	
+	/**
+	 * Returns true if the piece can pass through the other pieces, this piece can't
+	 */
 	public boolean canFly(){
 		return false;
 	}

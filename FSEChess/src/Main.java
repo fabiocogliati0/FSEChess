@@ -1,3 +1,8 @@
+/**
+ * Fabio Cogliati
+ * Progetto di Fundamentals of software engineering
+ */
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import view.ChessBoardFrame;

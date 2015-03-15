@@ -16,8 +16,16 @@ import model.Constants;
 import model.Model;
 import controller.Controller;
 
+/**
+ * The panel that represent the chessBoard and contains all the tiles
+ */
 public class ChessBoardPanel extends JPanel implements View{
 	
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 2L;
+
 	/**
 	 * Name of the white player that appears on the GUI
 	 */
@@ -39,7 +47,7 @@ public class ChessBoardPanel extends JPanel implements View{
 	private final static int TilesSizeY = Constants.tileSizeY;
 	
 	/**
-	 * The frame where this panel will be putted
+	 * The frame where this panel will be put
 	 */
 	private final JFrame frame;
 	
@@ -54,7 +62,7 @@ public class ChessBoardPanel extends JPanel implements View{
 	private Controller controller;
 	
 	/**
-	 * A matrix of tiles that are the tiles of the chessboard printed on screen
+	 * A matrix of tiles that are the tiles of the chessBoard printed on screen
 	 */
 	private ChessBoardTile[][] tiles = new ChessBoardTile[TilesSizeX][TilesSizeY];
 	
@@ -88,12 +96,12 @@ public class ChessBoardPanel extends JPanel implements View{
 	}
 
 	/**
-	 * Show the checkmate dialog. The variable color is the color of the player that make chessmates
+	 * Show the checkmate dialog. The variable color is the color of the player that make chessmate
 	 */
 	@Override
 	public void showCheckmateDialog(boolean color) {
 				
-		int result = JOptionPane.showConfirmDialog(this, getColorString(color) + " wins. Restart?", "Restart?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(this,"CheckMate! " + getColorString(!color) + " wins. Start a new game?", "Restart?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if(result == 0){
 			controller.restartGame();
 		}
@@ -107,14 +115,14 @@ public class ChessBoardPanel extends JPanel implements View{
 	 */
 	@Override
 	public void showCheckDialog(boolean color){
-		JOptionPane.showMessageDialog(this, getColorString(color) + " says:\"Check!\"");
+		JOptionPane.showMessageDialog(this, getColorString(!color) + " says:\"Check!\"");
 	}
 	
 	/**
 	 * Shows the tie dialog
 	 */
 	public void ShowDrawDialog(){
-		int result = JOptionPane.showConfirmDialog(this, "Draw, Restart?", "Restart?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(this, "Draw! , Start a new game?", "Restart?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if(result == 0){
 			controller.restartGame();
@@ -125,7 +133,7 @@ public class ChessBoardPanel extends JPanel implements View{
 	}
 
 	/**
-	 * Invoked by controller when the configuration of the model change
+	 * Invoked when the configuration of the model change
 	 */
 	@Override
 	public void onConfigurationChange() {
@@ -137,14 +145,14 @@ public class ChessBoardPanel extends JPanel implements View{
 	}
 	
 	/**
-	 * Select a tile of the chessboard with a special background color defined in ChessboardTile
+	 * Select a tile of the chessBoard with a special background color defined in ChessboardTile
 	 */
 	public void selectTileSpecialColor(int x, int y){
 		tiles[x][y].selectPiece();
 	}
 	
 	/**
-	 * Select a tile of the chessboard with a background color defined in ChessboardTile
+	 * Select a tile of the chessBoard with a background color defined in ChessboardTile
 	 */
 	public void selectTile(int x, int y){
 		tiles[x][y].selectTile();
@@ -167,8 +175,6 @@ public class ChessBoardPanel extends JPanel implements View{
 			}
 		}
 	}
-	
-	//-------------------------------Private methods-------------------------------------------
 
 	
 	
@@ -199,7 +205,7 @@ public class ChessBoardPanel extends JPanel implements View{
 	/**
 	 * Get the name of the player of the color passed at the function
 	 */
-	private String getColorString(boolean color){
+	private static String getColorString(boolean color){
 		if(color == Constants.whiteColor) return whiteString;
 		else return blackString;
 	}

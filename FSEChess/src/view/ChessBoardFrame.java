@@ -9,15 +9,28 @@ import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import controller.ChessBoardController;
-import controller.Controller;
 import model.ChessBoardModel;
 import model.ChessBoardConfiguration;
 import model.Model;
 
+/**
+ * Window that contains all the GUI
+ */
 public class ChessBoardFrame extends JFrame{
 	
+	/**
+	 * Serial version UID
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * The model of the chess game
+	 */
 	private final Model chessBoard;
 	
+	/**
+	 * Constructor that create the window
+	 */
 	public ChessBoardFrame(){
 		super();
 		
@@ -39,6 +52,9 @@ public class ChessBoardFrame extends JFrame{
 		pack();
 	}
 	
+	/**
+	 * Creates the panel containing the chessBoard
+	 */
 	private View addTilesPanel(){
 		ChessBoardPanel panel = new ChessBoardPanel(chessBoard, this);
 		add(panel, BorderLayout.CENTER);

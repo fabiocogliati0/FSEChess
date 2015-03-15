@@ -8,6 +8,9 @@ package view;
 import model.Model;
 import controller.Controller;
 
+/**
+ * View interface of the chess game
+ */
 public interface View {
 
 	/**
@@ -21,7 +24,7 @@ public interface View {
 	public void setController (Controller controller);
 	
 	/**
-	 * Show the checkmate dialog. The variable color is the color of the player that make chessmates
+	 * Show the checkmate dialog. The variable color is the color of the player that make chessmate
 	 */
 	public void showCheckmateDialog(boolean color);
 	
@@ -36,17 +39,17 @@ public interface View {
 	public void ShowDrawDialog();
 	
 	/**
-	 * Invoked by controller when the configuration of the model change
+	 * Invoked when the configuration of the model change
 	 */
 	public void onConfigurationChange();
 	
 	/**
-	 * Select a tile of the chessboard with a special background color
+	 * Select a tile of the chessBoard with a special background color
 	 */
 	public void selectTileSpecialColor(int x, int y);
 	
 	/**
-	 * Select a tile of the chessboard with a background color
+	 * Select a tile of the chessBoard with a background color
 	 */
 	public void selectTile(int x, int y);
 	

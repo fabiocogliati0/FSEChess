@@ -7,13 +7,27 @@ package model.ChessPieces;
 
 import model.Configuration;
 
+/**
+ * Class that represent Pawn Piece
+ */
 public class Pawn extends ChessPiece{
 
+	/**
+	 * Constructor that takes the color of the piece
+	 */
 	public Pawn(boolean color) {
 		super(color);
 	}
 
-	public boolean legalMove(int fromX, int fromY, int toX, int toY, Configuration configuration){
+	/**
+	 * Check if the piece can make passed move in an ideal empty and infinite chessBoard.
+	 * The configuration will be checked only if the piece have some special move that is triggered only depending other
+	 * pieces on the board (like pawns)
+	 */
+	public boolean canMove(int fromX, int fromY, int toX, int toY, Configuration configuration){
+		
+		if(configuration==null) 
+			throw new IllegalArgumentException("Can't check all moves of a pawn without configuration");
 		
 		int distX = toX - fromX;
 		int distY = toY - fromY;
@@ -47,6 +61,9 @@ public class Pawn extends ChessPiece{
 		return legal;
 	}
 	
+	/**
+	 * Returns true if the piece can pass through the other pieces, this piece can
+	 */
 	public boolean canFly(){
 		return false;
 	}
