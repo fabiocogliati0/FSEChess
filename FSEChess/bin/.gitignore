@@ -1,5 +1,8 @@
-/Main$1.class
-/Main.class
-/controller/
+/DataTest.class
 /model/
-/view/
+/PawnTest.class
+/KnightTest.class
+/QueenTest.class
+/EntireGameTest.class
+/EntireSGameTest.class
+/FamousMateTest.class
