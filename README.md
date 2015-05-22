@@ -1,7 +1,33 @@
 # FSEChess
-Esame di FSE
+
+Fundamentals of Software Engineering Exam
 Fabio Cogliati - VR101306
-Università di Verona.
+University of Verona, Italy
+
+Development of chess game using java with Swing libraries.
+
+The entire project is implemented using MVC pattern.
+ChessPiecesFactory class use factory pattern and generates a chess piece based on the passed parameter.
+
+The project have move prediction feature: for the selected piece the program colors all the tiles that represent a legal move by taking in account if the move brings you to a chess position for your opponent.
+
+Features not yet implemented:
+- Castling
+- En Passant
+- Pieces Promotion
+- Player vs IA
+
+Documentation is generated using JavaDoc
+
+The project have some JUnit test classes, they check the correct behaviour for Pawns, Queens and Knights moves and check the correct execution of two famous chek mate game: Fool's Mate Game and Scholar's Mate Game
+
+
+
+
+-----------------------------------------------------Italian---------------------------------------------------------------
+
+
+
 
 Alcune note sul progetto:
 
