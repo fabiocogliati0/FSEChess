@@ -1,8 +1,10 @@
 # FSEChess
 
-Fundamentals of Software Engineering Exam
 Fabio Cogliati - VR101306
-University of Verona, Italy
+
+Fundamentals of Software Engineering Exam
+
+University of Verona, Italy - Computer Game Development Master
 
 Development of chess game using java with Swing libraries.
 
